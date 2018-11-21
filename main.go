@@ -2,11 +2,11 @@ package main
 
 import (
 	"fmt"
-	"html/template"
-	"os"
-
 	"github.com/mlabouardy/nexus-cli/registry"
 	"github.com/urfave/cli"
+	"html/template"
+	"os"
+	"strings"
 )
 
 const (
@@ -182,7 +182,8 @@ func listTagsByImage(c *cli.Context) error {
 	tags, err := r.ListTagsByImage(imgName)
 
 	compareStringNumber := func(str1, str2 string) bool {
-		return extractNumberFromString(str1) < extractNumberFromString(str2)
+		//return extractNumberFromString(str1) < extractNumberFromString(str2)
+		return strings.Compare(str1, str2) < 0
 	}
 	Compare(compareStringNumber).Sort(tags)
 
@@ -238,7 +239,8 @@ func deleteImage(c *cli.Context) error {
 			} else {
 				tags, err := r.ListTagsByImage(imgName)
 				compareStringNumber := func(str1, str2 string) bool {
-					return extractNumberFromString(str1) < extractNumberFromString(str2)
+					//return extractNumberFromString(str1) < extractNumberFromString(str2)
+					return strings.Compare(str1, str2) < 0
 				}
 				Compare(compareStringNumber).Sort(tags)
 				if err != nil {

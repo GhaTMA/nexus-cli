@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"sort"
 	"strconv"
@@ -39,6 +40,7 @@ func extractNumberFromString(str string) (num int) {
 		return 1 << 32
 	}
 
+	fmt.Printf("LOG: number length = %v\n", len(strSlice))
 	num, err := strconv.Atoi(strings.Join(strSlice, ""))
 	if err != nil {
 		log.Fatal(err)
